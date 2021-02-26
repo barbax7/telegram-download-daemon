@@ -45,6 +45,7 @@ on:
   # uses: JackMcKew/pyinstaller-action-windows@a8dee21ad01bbc7e7363d445bb632691b95ba057
 jobs:
   build:
-    uses: JackMcKew/pyinstaller-action-windows@v0.1.2
-    with: .
+    steps:
+      uses: JackMcKew/pyinstaller-action-windows@v0.1.2
+      with: .
     # Directory containing source code (optional requirements.txt)
