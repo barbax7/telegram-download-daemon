@@ -20,6 +20,14 @@ import multiprocessing
 import argparse
 import asyncio
 
+try:
+    from dotenv import load_dotenv
+    dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+    load_dotenv(dotenv_path)
+except ModuleNotFoundError:
+    print('dotenv non è installato')
+except:
+    pass
 
 TDD_VERSION="1.3"
 
