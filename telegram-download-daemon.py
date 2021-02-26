@@ -6,6 +6,7 @@
 from os import getenv, rename
 import subprocess
 import math
+import os
 
 from sessionManager import getSession, saveSession
 
@@ -123,7 +124,7 @@ async def set_progress(filename, message, received, total):
         try: in_progress.pop(filename)
         except: pass
         return
-    percentage = math.trunc(received / total * 10000) / 100;
+    percentage = math.trunc(received / total * 10000) / 100
 
     progress_message= "{0} % ({1} / {2})".format(percentage, received, total)
     in_progress[filename] = progress_message
@@ -156,7 +157,8 @@ with TelegramClient(getSession(), api_id, api_hash,
                 output = "Unknown command"
 
                 if command == "list":
-                    output = subprocess.run(["ls -l "+downloadFolder], shell=True, stdout=subprocess.PIPE,stderr=subprocess.STDOUT).stdout.decode('utf-8')
+                    os.chdir(os.path.dirname(__file__))
+                    output = subprocess.run(["dir", downloadFolder], shell=True, stdout=subprocess.PIPE,stderr=subprocess.STDOUT).stdout.decode('windows-1252')
                 elif command == "status":
                     try:
                         output = "".join([ "{0}: {1}\n".format(key,value) for (key, value) in in_progress.items()])
